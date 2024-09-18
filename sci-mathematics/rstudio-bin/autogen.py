@@ -5,7 +5,7 @@ import re
 
 async def generate(hub, **pkginfo):
 	html_data = await hub.pkgtools.fetch.get_page(
-		f"https://www.rstudio.com/products/rstudio/download/"
+		f"https://www.posit.co/download/rstudio-desktop/"
 		)
 	soup = BeautifulSoup(html_data, "html.parser")
 	best_archive = None
