@@ -1,4 +1,3 @@
-# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
@@ -7,15 +6,15 @@ CMAKE_MAKEFILE_GENERATOR=emake
 inherit eutils fortran-2 cmake-utils multilib flag-o-matic toolchain-funcs
 
 LPN=lapack
-LPV=3.6.0
+LPV=3.12.1
 
 DESCRIPTION="Basic Linear Algebra Subprograms F77 reference implementations"
 HOMEPAGE="http://www.netlib.org/blas/"
-SRC_URI="http://www.netlib.org/${LPN}/${LPN}-${LPV}.tgz"
+SRC_URI="http://www.netlib.org/${LPN}/${LPN}-${LPV}.tar.gz"
 
 LICENSE="BSD"
 SLOT="0"
-KEYWORDS="~alpha ~amd64 ~arm ~hppa ~ia64 ~mips ~ppc ~ppc64 ~s390 ~sparc ~x86 ~amd64-fbsd ~x86-fbsd ~amd64-linux ~x86-linux ~ppc-macos ~x64-macos"
+KEYWORDS="*"
 IUSE="doc"
 
 RDEPEND="
@@ -25,7 +24,6 @@ DEPEND="${RDEPEND}
 	virtual/pkgconfig"
 
 S="${WORKDIR}/${LPN}-${LPV}"
-PATCHES=( "${FILESDIR}/lapack-reference-${LPV}-fix-build-system.patch" )
 
 src_prepare() {
 	cmake-utils_src_prepare
@@ -67,6 +65,13 @@ src_install() {
 	mkdir -p "${ED}/usr/$(get_libdir)/blas/reference" || die
 	mv "${ED}/usr/$(get_libdir)"/lib* "${ED}/usr/$(get_libdir)/pkgconfig"/* \
 		"${ED}/usr/$(get_libdir)/blas/reference" || die
+	if [[ ${CHOST} == *-darwin* ]] ; then
+		# modify install_names accordingly, bug #605214
+		local lib
+		for lib in "${ED}"/usr/$(get_libdir)/blas/reference/*.dylib ; do
+			install_name_tool -id "${lib#${D%/}}" "${lib}"
+		done
+	fi
 	rmdir "${ED}/usr/$(get_libdir)/pkgconfig" || die
 
 	eselect blas add $(get_libdir) "${T}"/eselect.blas.reference ${ESELECT_PROF}

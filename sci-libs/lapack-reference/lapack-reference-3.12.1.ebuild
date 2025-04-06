@@ -6,7 +6,7 @@ inherit eutils fortran-2 cmake-utils multilib flag-o-matic toolchain-funcs
 
 DESCRIPTION="Reference implementation of LAPACK"
 HOMEPAGE="http://www.netlib.org/lapack/"
-SRC_URI="http://www.netlib.org/lapack/lapack-${PV}.tgz"
+SRC_URI="http://www.netlib.org/lapack/lapack-${PV}.tar.gz"
 
 LICENSE="BSD"
 SLOT="0"
@@ -19,7 +19,7 @@ DEPEND="app-eselect/eselect-lapack
 RDEPEND="${DEPEND}"
 
 S="${WORKDIR}/lapack-${PV}"
-PATCHES=( "${FILESDIR}/${P}-fix-build-system.patch" )
+PATCHES=( "${FILESDIR}/${P}-lwork.patch" )
 
 src_prepare() {
 	cmake-utils_src_prepare
