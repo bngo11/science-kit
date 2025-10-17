@@ -19,7 +19,12 @@ DEPEND="app-eselect/eselect-lapack
 RDEPEND="${DEPEND}"
 
 S="${WORKDIR}/lapack-${PV}"
-PATCHES=( "${FILESDIR}/${P}-lwork.patch" )
+PATCHES=(
+	"${FILESDIR}/${P}-broken-flow.patch"
+	"${FILESDIR}/${P}-broken-flow-deux.patch"
+	"${FILESDIR}/${P}-broken-flow-trois.patch"
+	"${FILESDIR}/${P}-lapack64-pc.patch"
+)
 
 src_prepare() {
 	cmake-utils_src_prepare

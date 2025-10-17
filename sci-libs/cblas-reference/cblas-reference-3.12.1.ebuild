@@ -1,30 +1,28 @@
-# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
 CMAKE_MAKEFILE_GENERATOR=emake
 
 inherit eutils fortran-2 cmake-utils multilib flag-o-matic toolchain-funcs
 
 LPN=lapack
-LPV=3.6.0
+LPV=3.12.1
 
 DESCRIPTION="C wrapper interface to the F77 reference BLAS implementation"
 HOMEPAGE="http://www.netlib.org/cblas/"
-SRC_URI="http://www.netlib.org/${LPN}/${LPN}-${LPV}.tgz"
+SRC_URI="http://www.netlib.org/${LPN}/${LPN}-${LPV}.tar.gz"
 
 LICENSE="BSD"
 SLOT="0"
-KEYWORDS="~alpha ~amd64 ~hppa ~ppc ~ppc64 ~s390 ~sparc ~x86 ~amd64-fbsd ~x86-fbsd ~amd64-linux ~x86-linux ~x64-macos"
+KEYWORDS="*"
 IUSE=""
 
 DEPEND="app-eselect/eselect-cblas
-	>=virtual/blas-3.6
+	>=virtual/blas-3.12
 	virtual/pkgconfig"
 RDEPEND="${DEPEND}"
 
 S="${WORKDIR}/${LPN}-${LPV}"
-PATCHES=( "${FILESDIR}/lapack-reference-${LPV}-fix-build-system.patch" )
 
 src_prepare() {
 	cmake-utils_src_prepare

@@ -1,0 +1,7 @@
+DEFINED_PHASES=-
+DESCRIPTION=Virtual for FORTRAN 77 BLAS implementation
+EAPI=6
+KEYWORDS=*
+RDEPEND=|| ( >=sci-libs/blas-reference-3.12 >=sci-libs/mkl-9.1.023 )
+SLOT=0
+_md5_=a4e16d086d5e10e420e0d3d13507d6d7

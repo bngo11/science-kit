@@ -1,0 +1,7 @@
+DEFINED_PHASES=-
+DESCRIPTION=Virtual for BLAS C implementation
+EAPI=6
+KEYWORDS=*
+RDEPEND=|| ( >=sci-libs/cblas-reference-3.12 sci-libs/gsl[-cblas-external] >=sci-libs/mkl-9.1.023 )
+SLOT=0
+_md5_=db2938f4ea41d10a984b4600a23b6614

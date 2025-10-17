@@ -1,0 +1,7 @@
+DEFINED_PHASES=-
+DESCRIPTION=Virtual for Linear Algebra Package FORTRAN 77 (LAPACK) implementation
+EAPI=6
+KEYWORDS=*
+RDEPEND=|| ( >=sci-libs/lapack-reference-3.12 >=sci-libs/mkl-10 )
+SLOT=0
+_md5_=2b7cce84ce756fc7b190d4cece44d064
