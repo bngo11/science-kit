@@ -1,31 +1,33 @@
 #!/usr/bin/env python3
 
-import re
-
+import json
 
 async def generate(hub, **pkginfo):
 	github_user = "qgis"
-	github_repo = "QGIS"
-	download_page = "https://qgis.org/downloads"
-	html = await hub.pkgtools.fetch.get_page(f"{download_page}")
-	matches = re.findall(f'<a href="qgis-([0-9.]*).tar.bz2">', html)
-	version = matches[-1]
+	github_repo = pkginfo.get("name")
+	json_data = await hub.pkgtools.fetch.get_page(f"https://api.github.com/repos/{github_user}/{github_repo}/releases", is_json=True)
+	version = None
+	dl_url = "https://qgis.org/downloads"
 
-	if version is None:
-		raise hub.pkgtools.ebuild.BreezyError(f"Can't find a suitable release of {pkginfo['name']}")
-	src_artifact = hub.pkgtools.ebuild.Artifact(url=f"{download_page}/qgis-{version}.tar.bz2")
-	patches = []
-	if re.match(r"3.18.[0-9]+", version):
-		patches.append("qgis-3.18.0-alternate-proj-header.patch")
-	ebuild = hub.pkgtools.ebuild.BreezyBuild(
-		**pkginfo,
-		version=version,
-		github_user=github_user,
-		github_repo=github_repo,
-		patches=patches,
-		artifacts=[src_artifact],
-	)
-	ebuild.push()
+	for item in json_data:
+		try:
+			if item["prerelease"] or item["draft"]:
+				continue
 
+			version = item["name"]
+			list(map(int, version.split(".")))
+			break
+
+		except (KeyError, IndexError, ValueError):
+			continue
+
+	if version:
+		url = f"{dl_url}/qgis-{version}.tar.bz2"
+		ebuild = hub.pkgtools.ebuild.BreezyBuild(
+			**pkginfo,
+			version=version,
+			artifacts=[hub.pkgtools.ebuild.Artifact(url=url, final_name=url.rsplit("/")[-1])]
+		)
+		ebuild.push()
 
 # vim: ts=4 sw=4 noet
