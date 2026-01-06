@@ -8,6 +8,6 @@ LICENSE=AGPL-3
 RDEPEND=app-text/pandoc dev-java/aopalliance:1 dev-java/gin:2.1 dev-java/javax-inject =dev-java/validation-api-1.0*:1.0[source] dev-haskell/pandoc-citeproc dev-lang/R[cairo] dev-libs/boost:= dev-cpp/yaml-cpp >=dev-libs/mathjax-2.7.4 sys-apps/util-linux sys-devel/clang:* sys-libs/zlib dev-db/soci[postgres,sqlite,c++11] >=virtual/jre-1.8:= x11-libs/pango || ( dev-libs/openssl:0= dev-libs/libressl:0= )
 RESTRICT=strip preserve-libs
 SLOT=0
-SRC_URI=https://download1.rstudio.org/electron/jammy/amd64/rstudio-2025.09.2-418-amd64-debian.tar.gz -> rstudio-2025.09.2.418_x86_64.pkg.tar.gz
+SRC_URI=https://download1.rstudio.org/electron/jammy/amd64/rstudio-2026.01.0-392-amd64-debian.tar.gz -> rstudio-2026.01.0.392_x86_64.pkg.tar.gz
 _eclasses_=unpacker	cbd6624f820a4289653f5dcb999bea7a	xdg	c7ba313ea1eaf266f95cc6235f7d6a07	xdg-utils	14d00d009167652b1fa363e55effe213
-_md5_=86ea38e2d52263588dde7ef9e92293eb
+_md5_=b41c9399aa0bf11914446f31f6e28d2e
