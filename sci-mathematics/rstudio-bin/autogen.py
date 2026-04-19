@@ -1,32 +1,33 @@
 #!/usr/bin/env python3
 
-from bs4 import BeautifulSoup
-import re
+import json
 
 async def generate(hub, **pkginfo):
-	html_data = await hub.pkgtools.fetch.get_page(
-		f"https://www.posit.co/download/rstudio-desktop/"
-		)
-	soup = BeautifulSoup(html_data, "html.parser")
-	best_archive = None
-	for link in soup.find_all("a"):
-		href = link.get("href")
-		if href is not None and href.endswith(".tar.gz"):
-			# currently the first release is the newest ubuntu/debian based one
-			best_archive = href
+	github_user = "rstudio"
+	github_repo = "rstudio"
+	json_data = await hub.pkgtools.fetch.get_page(f"https://api.github.com/repos/{github_user}/{github_repo}/tags", is_json=True)
+	version = None
+	url = None
+
+	for item in json_data:
+		try:
+			version_tag = item["name"]
+			date, ver = version_tag.split("+")
+			version = date.lstrip("v")
+			list(map(int, version.split(".")))
+			asset_name = f"rstudio-{version}-{ver}.tar.gz"
+			url = item["tarball_url"]
 			break
-	version = re.search(r"rstudio-.*-amd64",best_archive).group(0)[8:-6]
-	# comes in form YYYY.MM.DD-NUM and we need to make it YYYY.MM.DD.NUM
-	version = version.replace("-",".")
 
+		except (KeyError, IndexError, ValueError):
+			continue
 
-	ebuild = hub.pkgtools.ebuild.BreezyBuild(
-		**pkginfo,
-		version=version,
-		artifacts=[hub.pkgtools.ebuild.Artifact(url=best_archive, final_name=f"rstudio-{version}_x86_64.pkg.tar.gz")]
-	)
-
-	ebuild.push()
-
+	if version and url:
+		ebuild = hub.pkgtools.ebuild.BreezyBuild(
+			**pkginfo,
+			version=f"{version}.{ver}",
+			artifacts=[hub.pkgtools.ebuild.Artifact(url=url, final_name=asset_name)]
+		)
+		ebuild.push()
 
 # vim: ts=4 sw=4 noet
