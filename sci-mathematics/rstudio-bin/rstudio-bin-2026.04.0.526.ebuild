@@ -14,7 +14,7 @@ DESCRIPTION="IDE for the R language"
 HOMEPAGE="
 	http://www.rstudio.org
 	https://github.com/rstudio/rstudio/"
-SRC_URI="https://api.github.com/repos/rstudio/rstudio/tarball/refs/tags/v2026.01.2+418 -> rstudio-2026.01.2-418.tar.gz"
+SRC_URI="https://api.github.com/repos/rstudio/rstudio/tarball/refs/tags/v2026.04.0+526 -> rstudio-2026.04.0-526.tar.gz"
 
 LICENSE="AGPL-3"
 SLOT="0"
