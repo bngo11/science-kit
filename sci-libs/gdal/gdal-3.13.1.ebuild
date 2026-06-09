@@ -7,7 +7,7 @@ inherit cmake java-pkg-opt-2 python-single-r1
 
 DESCRIPTION="Translator library for raster geospatial data formats (includes OGR support)"
 HOMEPAGE="https://gdal.org/"
-SRC_URI="https://github.com/OSGeo/gdal/tarball/130cb4675a0b42bd32acad56e57022cca44fc008 -> gdal-3.13.0-130cb46.tar.gz"
+SRC_URI="https://github.com/OSGeo/gdal/tarball/b2e6057d1d0f2cb4c11bfdf79ab1a61def0ce9ca -> gdal-3.13.1-b2e6057.tar.gz"
 
 LICENSE="BSD Info-ZIP MIT"
 SLOT="0/31" # subslot is libgdal.so.<SONAME>
