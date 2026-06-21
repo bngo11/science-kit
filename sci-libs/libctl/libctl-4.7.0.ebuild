@@ -6,7 +6,7 @@ inherit fortran-2 autotools
 
 DESCRIPTION="Guile-based library for scientific simulations"
 HOMEPAGE="http://ab-initio.mit.edu/libctl/"
-SRC_URI="https://github.com/NanoComp/libctl/tarball/5a8155b4e1dbb0ec1a438e78bf0dae6f7f5d7f94 -> libctl-4.6.0-5a8155b.tar.gz"
+SRC_URI="https://github.com/NanoComp/libctl/tarball/00ab34a6bf4f6b462cb042ef3bd2222ab3eed0ef -> libctl-4.7.0-00ab34a.tar.gz"
 
 SLOT="0"
 LICENSE="GPL-2"
@@ -18,7 +18,7 @@ DEPEND="
 	sci-libs/nlopt"
 RDEPEND="${DEPEND}"
 
-S="${WORKDIR}/NanoComp-libctl-5a8155b"
+S="${WORKDIR}/NanoComp-libctl-00ab34a"
 
 src_install() {
 
