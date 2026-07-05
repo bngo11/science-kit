@@ -6,7 +6,7 @@ inherit autotools
 
 DESCRIPTION="Universal Non-Uniform Random number generator"
 HOMEPAGE="http://statmath.wu.ac.at/unuran/"
-SRC_URI="https://statmath.wu.ac.at/src/unuran-1.11.0.tar.gz -> unuran-1.11.0.tar.gz
+SRC_URI="https://statmath.wu.ac.at/src/unuran-1.12.0.tar.gz -> unuran-1.12.0.tar.gz
 "
 
 LICENSE="GPL-2"
