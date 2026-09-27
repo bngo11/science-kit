@@ -38,6 +38,7 @@ src_prepare() {
 
 src_configure() {
 	local mycmakeargs=(
+		-DCMAKE_POLICY_VERSION_MINIMUM=3.5
 		-DBUILD_STATIC_LIBS=$(usex static-libs)
 		-DLINK_APPS_SHARED=ON
 		-DDOC_INSTALL_DIR="${EPREFIX}/usr/share/doc/${PF}"
